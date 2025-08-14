@@ -22,7 +22,6 @@ export class LoginComponent {
     if (form.invalid) {
       return;
     }
-
     this.authService.login(this.email, this.password).subscribe({
       next: (res) =>{
         console.log(res.accessToken);
