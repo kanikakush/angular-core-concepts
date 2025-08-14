@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { LoginResponse } from '../_interface/LoginResponse';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
- private apiUrl = 'https://localhost:7204/api'; // Replace with real API URL
+ private apiUrl = environment.apiBaseUrl; // Replace with real API URL
   private accessToken = 'accessToken';
   private refreshUser = 'refreshUser';
 
