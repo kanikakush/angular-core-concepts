@@ -11,8 +11,9 @@ import { EditProfileComponent } from './_services/edit-profile/edit-profile.comp
 export const routes: Routes = [
   //{ path: '', component: LandingPageComponent }, // Landing page
 //  { path: 'login', component: LoginComponent }, // egar loading
-  { path: 'register', component: RegisterComponent },
- 
+  { path: 'register',
+    component: RegisterComponent 
+  },
   {
     path: 'dashboard',
     canActivate: [authGuard],  // ✅ functional guard
@@ -22,7 +23,6 @@ export const routes: Routes = [
   {
     path: 'edit-profile',
     canDeactivate: [unsavedChangesGuard],
-    //component: EditProfileComponent
     loadComponent: () => import('./_services/edit-profile/edit-profile.component').then(m => m.EditProfileComponent)
   },
   {
@@ -33,7 +33,6 @@ export const routes: Routes = [
   {
     path: 'new-dashboard',
     canMatch: [featureToggleGuard],
-    //component: NewDashboardComponent
     loadComponent: () => import('./_services/new-dashboard/new-dashboard.component').then(m => m.NewDashboardComponent)
   },
   { 

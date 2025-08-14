@@ -15,7 +15,7 @@ export class EditProfileComponent implements HasUnsavedChanges {
   savedName = '';
 
   hasUnsavedChanges(): boolean {
-    console.log("Call from edit, hasUnsavedChanges");
+    console.log("Call from edit, hasUnsavedChanges, value of name: {0}, {1}", this.name, this.savedName);
     return this.name !== this.savedName;
   }
 
