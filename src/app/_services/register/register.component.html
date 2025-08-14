@@ -1,0 +1,43 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <label>Name:</label>
+  <input formControlName="name" type="text">
+  <div *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid">Name is required</div>
+
+  <label>Email:</label>
+  <input formControlName="email" type="email">
+  <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">Valid email required</div>
+
+  <label>Password:</label>
+  <input formControlName="password" type="password">
+  <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+    Password must be at least 6 characters
+  </div>
+
+  <label>Role:</label>
+  <select formControlName="role">
+    <option value="">Select Role</option>
+    <option *ngFor="let r of roles" [value]="r">{{ r }}</option>
+  </select>
+
+  <label>Gender:</label>
+  <label *ngFor="let g of genders">
+    <input type="radio" [value]="g" formControlName="gender"> {{ g }}
+  </label>
+
+  <label>
+    <input type="checkbox" formControlName="subscribe"> Subscribe to newsletter
+  </label>
+
+  <div formArrayName="skills">
+    <div *ngFor="let skill of skills.controls; let i = index">
+      <input [formControlName]="i" placeholder="Skill">
+      <button type="button" (click)="removeSkill(i)">Remove</button>
+    </div>
+  </div>
+  <button type="button" (click)="addSkill()">Add Skill</button>
+
+  <button type="submit" [disabled]="loading">Register</button>
+
+  <p *ngIf="successMessage" style="color: green">{{ successMessage }}</p>
+  <p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
+</form>

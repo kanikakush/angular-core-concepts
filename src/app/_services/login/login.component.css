@@ -1,0 +1,28 @@
+.login-container {
+  max-width: 300px;
+  margin: auto;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+label {
+  display: block;
+  margin: 8px 0 4px;
+}
+
+input {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 8px;
+}
+
+.error {
+  color: red;
+  font-size: 0.85em;
+}
+
+button {
+  width: 100%;
+  padding: 8px;
+}
