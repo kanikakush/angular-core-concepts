@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../_auth-services/auth-service.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CustomToolTipDirective } from '../../_ui-utility/custom-directive/custom-tool-tip.directive';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CustomToolTipDirective],
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

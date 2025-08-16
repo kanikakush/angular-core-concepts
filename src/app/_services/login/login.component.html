@@ -1,6 +1,6 @@
 <div class="login-container">
   <h2>Login</h2>
-  
+
   <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
     
     <!-- Email Field -->
@@ -11,7 +11,9 @@
         name="email" 
         [(ngModel)]="email" 
         required 
-        email>
+        email
+        appTooltip="Enter a valid email like test@example.com"
+        [tooltipStyles]="{ background: 'darkblue', color: 'white', fontSize: '13px', padding: '6px' }">
       <div *ngIf="loginForm.submitted && !loginForm.controls['email']?.valid" class="error">
         Please enter a valid email
       </div>
@@ -25,7 +27,9 @@
         name="password" 
         [(ngModel)]="password" 
         required 
-        minlength="6">
+        minlength="6"
+        appTooltip="Password must be at least 6 characters"
+        [tooltipStyles]="{ background: 'red', color: 'yellow', fontSize: '12px', border: '1px solid yellow' }">
       <div *ngIf="loginForm.submitted && !loginForm.controls['password']?.valid" class="error">
         Password must be at least 6 characters
       </div>
