@@ -5,15 +5,12 @@ import { unsavedChangesGuard } from './_guards/UnsavedChangesGuard';
 import { productResolver } from './_guards/ProductResolverGuard';
 import { featureToggleGuard } from './_guards/FeatureToggleGuard';
 import { LoginComponent } from './_services/login/login.component';
-import { NewDashboardComponent } from './_services/new-dashboard/new-dashboard.component';
-import { EditProfileComponent } from './_services/edit-profile/edit-profile.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 export const routes: Routes = [
-  //{ path: '', component: LandingPageComponent }, // Landing page
-//  { path: 'login', component: LoginComponent }, // egar loading
-  { path: 'register',
-    component: RegisterComponent 
-  },
+  { path: '', component: LandingPageComponent }, // Landing page
+  { path: 'login', component: LoginComponent }, // egar loading
+  { path: 'register',    component: RegisterComponent },
   {
     path: 'dashboard',
     canActivate: [authGuard],  // ✅ functional guard
@@ -34,10 +31,6 @@ export const routes: Routes = [
     path: 'new-dashboard',
     canMatch: [featureToggleGuard],
     loadComponent: () => import('./_services/new-dashboard/new-dashboard.component').then(m => m.NewDashboardComponent)
-  },
-  { 
-    path: 'login',
-    loadComponent: () => import('./_services/login/login.component').then(m => m.LoginComponent)
   },
   { 
     path: 'unauthorized',

@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { CustomHttpErrorResponse } from '../_interface/HttpErrorResponse';
+import { CustomHttpResponse } from '../_interface/HttpErrorResponse';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router); // instead of constructor injection
@@ -16,7 +16,7 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   return next(req).pipe(
-    catchError((err: CustomHttpErrorResponse) => {
+    catchError((err: CustomHttpResponse) => {
       if (err.status === 401) {
         // Clear tokens from storage
         localStorage.removeItem('accessToken');
@@ -49,7 +49,7 @@ export class ClassJwtInterceptor implements HttpInterceptor {
     }
 
     return next.handle(req).pipe(
-      catchError((err: CustomHttpErrorResponse) => {
+      catchError((err: CustomHttpResponse) => {
         if (err.status === 401) {
           // Clear tokens from storage
           localStorage.removeItem('accessToken');
