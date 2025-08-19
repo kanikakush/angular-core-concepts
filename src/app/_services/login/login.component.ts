@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../_auth-services/auth-service.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CustomToolTipDirective } from '../../_ui-utility/custom-directive/custom-tool-tip.directive';
+import { AutoUnsubscribe } from '../../custom-decorator/auto-unsubscribe';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,18 +14,19 @@ import { CustomToolTipDirective } from '../../_ui-utility/custom-directive/custo
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+@AutoUnsubscribe // using custom decorator
+export class LoginComponent implements OnDestroy {
  email = '';
   password = '';
   errorMessage = '';
-
+ private subscription!: Subscription; // store subscription
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogin(form: any) {
     if (form.invalid) {
       return;
     }
-    this.authService.login(this.email, this.password).subscribe({
+    this.subscription =this.authService.login(this.email, this.password).subscribe({
       next: (res) =>{
         console.log(res.accessToken);
         console.log(res.refreshUser);
@@ -38,5 +41,12 @@ export class LoginComponent {
       }
     }
     });
+  }
+  //manual way of cleaning up the memory
+    ngOnDestroy(): void {
+   if (this.subscription) {
+      this.subscription.unsubscribe();
+      console.log('Login subscription cleaned up');
+    }
   }
 }
